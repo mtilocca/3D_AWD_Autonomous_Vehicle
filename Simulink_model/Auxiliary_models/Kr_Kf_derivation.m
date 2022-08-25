@@ -13,6 +13,10 @@ solution = solve([eqn1, eqn2], [Kr, Kf]);
 solution.Kf; % front cornering stiffness 
 solution.Kr; % rear cornering stiffness 
 
+solution3 = solve([eqn2], [Iz]); 
+solution3
+
+
 % derivation of the lateral and longitudinal velocities given the x-y deriv
 % and yaw angle 
 
