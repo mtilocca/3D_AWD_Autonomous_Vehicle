@@ -230,7 +230,7 @@ pFitF = polyval(coeff1, alphaFront_f);
 pFitR = polyval(coeff2, alphaRear);
 
 figure(11)
-plot(alphaFront_f, FyF_f, 'o', 'DisplayName','data')
+plot(alphaFront_f, FyF_f, '.', 'DisplayName','data')
 xlabel("Front side slip angle [rad]")
 ylabel("F_y Front [N]")
 grid on
@@ -242,7 +242,7 @@ legend
 hold off
 
 figure(12)
-plot(alphaRear, FyR, 'o', 'DisplayName','data')
+plot(alphaRear, FyR, '.', 'DisplayName','data')
 xlabel("Rear side slip angle [rad]")
 ylabel("F_y Rear [N]")
 grid on 

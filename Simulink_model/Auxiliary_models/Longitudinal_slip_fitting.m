@@ -99,7 +99,7 @@ pFitR = polyval(coeff2, SlipR);
 
 % plot front -- data vs fitting 
 figure(1)
-plot(SlipF, Fxf, 'o', "DisplayName", "data")
+plot(SlipF, Fxf, '.', "DisplayName", "data")
 xlim([-0.1 0.1])
 grid on 
 grid minor 
@@ -115,7 +115,7 @@ legend
 % plot rear -- data vs fitting 
 
 figure(2)
-plot(SlipR, Fxr, 'o' , "DisplayName", "data")
+plot(SlipR, Fxr, '.' , "DisplayName", "data")
 xlim([-0.1 0.1])
 title("Rear Longitudinal Slip")
 grid on 
@@ -166,6 +166,45 @@ title('Rear longitudinal slip')
 
 coeff1 
 coeff2
+
+
+%% vertical load estimation -- estimate avg az acc at different velocities windows 
+
+az = insData.azCG.value;
+taz = insData.azCG.value; 
+
+
+vx = vx.*3.6; 
+
+figure(20)
+plot(vx.*3.6, az, '.', "DisplayName","a_z")
+grid on 
+grid minor 
+xlabel("V_x [km/h]")
+ylabel("a_z [m/s^2]")
+title("Vertical acc. vs long. velocity")
+xlim([0, 40])
+legend
+
+
+% create filterings bins 
+az0_10 = (vx <10.1) & ( vx > 0.1); 
+
+az10_20 = (vx >= 10.1) & (vx < 20.1);
+
+az20_30 = (vx >= 20.1)  & (vx < 30.1);
+
+az30_40 = (vx >=30.1) & (vx < 40.05);
+
+
+az010 = mean(az(az0_10))
+
+az1020 = mean (az(az10_20))
+
+az2030 = mean (az(az20_30))
+
+az3040 = mean (az(az30_40))
+
 
 %% Auxiliary function - find velocity of the wheel through hall effect sensor measurements 
 

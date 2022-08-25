@@ -1,4 +1,4 @@
-function [Fx, Fy] = Dugoff_tyre_model(Cs, Ca, mu, W, eps, s, alpha, v)
+function [Fx, Fy] = Brush_tyre_model(Cs, Ca, mu, W, eps, s, alpha, v)
 
 % ********************************************************************************************************
 % INPUTS OF THE MODEL 
