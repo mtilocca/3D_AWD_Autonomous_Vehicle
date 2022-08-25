@@ -1,4 +1,4 @@
-function [Fx, Fy] = Brush_tyre_model(v, wf, wr, vx, vy, delta, omega)
+function [Fx, Fy, Fz] = Brush_tyre_model(v, wf, wr, vx, vy, delta, omega)
 
 % ********************************************************************************************************
 % INPUTS OF THE MODEL 
@@ -38,6 +38,12 @@ mu = 0.8; % dry road
 % mu = 0.1 % ice 
 % mu = 0.2 % snow 
 
+%% vehicle parameters 
+a = 1.2; 
+b = 1.29;
+
+mf =526;
+mr = 488;
 %% vertical load mapping according to forward velocity 
 
 
@@ -59,12 +65,11 @@ otherwise
 az = 9.81; 
 end
 
-mf =526;
-mr = 488;
+
 Wf = mf*az;
 Wr = mr *az; 
 
-
+Fz = [Wf Wr]; 
 %%                FRONT WHEEL/S 
 lambdaf = Lambd(CsF, CaF, mu, Wf, eps, sf, alphaF, v );
 
@@ -77,7 +82,8 @@ Fx_f = (- (CsF *sf )/(1-sf)) * Flambaf;
 
 % lateral force 
 
-%Fy_f = (- (CaF *tan(alpha))/(1-s)) * Flamba;
+LambfyF = latForce(omega, vx, vy, delta); 
+Fy_f = CaF * LambfyF * Wf; 
 
 %%   REAR WHEELS 
 
@@ -90,8 +96,8 @@ Fx_r = (- (CsR *sr )/(1-sr)) * Flambar;
 
 % lateral force 
 
-Fy_r = (- (CaR *tan(alphaR))/(1-sr)) * Flambar;
-
+lambfyR = (vy - b*omega) / vx; 
+Fy_r = CaR * lambfyR * Wr; 
 
 %% output 
 Fx = [Fx_f Fx_r];
@@ -123,4 +129,12 @@ elseif lambda <1
     lambdaCalc = (2- lambda)*lambda ; 
 
 end 
+end 
+
+%% lat force generation front axle 
+function fy = latForce(omega, vx, vy, delta)
+ a = 1.2; 
+
+fy = delta*( (1 + (a^2 * omega^2)/(vx^2))  - ((vy + a*omega)/vx) ); 
+
 end 
