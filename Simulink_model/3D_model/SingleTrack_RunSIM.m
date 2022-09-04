@@ -5,7 +5,7 @@ clear all;
 Initialization;
 %% Define initial conditions for the simulation & load constats of the vehicle and path 
 % ----------------------------
-X0 = IConditions(); 
+ X0 = IConditions(); 
 
 %% Simulation parameters
 
@@ -13,6 +13,13 @@ X0 = IConditions();
     step_size = 0.001; % [s] discrete solver step
     tf = 20;    % [s] stop simulation time
          
+
+
+  %% controllers 
+
+  % longitudinal 
+
+  % lateral 
 
 %% Start Simulation
 
@@ -24,4 +31,4 @@ fprintf('Simulation completed in: %.3f [s]\n', total_time_simulation )
 
 %% Post-Processing
 
-dataAnalysis(model_sim,vehicle_data,Tf); 
+%dataAnalysis(model_sim,vehicle_data,Tf);   % later stage 

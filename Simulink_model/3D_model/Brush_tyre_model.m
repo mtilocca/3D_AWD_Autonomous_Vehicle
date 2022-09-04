@@ -1,4 +1,4 @@
-function [Fx, Fy, Fz] = Brush_tyre_model(v, wf, wr, vx, vy, delta, omega)
+function [Fx, Fy, Fz] = Brush_tyre_model(vx, vy, delta, omega)
 
 % ********************************************************************************************************
 % INPUTS OF THE MODEL 
@@ -44,7 +44,7 @@ b = 1.29;
 
 mf =526;
 mr = 488;
-%% vertical load mapping according to forward velocity 
+%% vertical load mapping according to forward velocity & load transfer model simplified 
 
 
 switch v
@@ -65,13 +65,14 @@ otherwise
 az = 9.81; 
 end
 
+% simple load transfer model based on empirical data 
 
-Wf = mf*az;
-Wr = mr *az; 
+Wf = (mf+mr)*az *(a/(a+b));
+Wr = (mr +mf)*az *(b/(a+b)); 
 
 Fz = [Wf Wr]; 
 %%                FRONT WHEEL/S 
-lambdaf = Lambd(CsF, CaF, mu, Wf, eps, sf, alphaF, v );
+lambdaf = Lambd(CsF, CaF, mu, Wf, eps, sf, alphaF);
 
 % lambda func 
 
@@ -87,7 +88,7 @@ Fy_f = CaF * LambfyF * Wf;
 
 %%   REAR WHEELS 
 
-lambdar = Lambd(CsR, CaR, mu, Wr, eps, sr, alphaR, v );
+lambdar = Lambd(CsR, CaR, mu, Wr, eps, sr, alphaR);
 
 Flambar = calcLamb(lambdar); 
 
