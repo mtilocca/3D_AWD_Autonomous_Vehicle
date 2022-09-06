@@ -61,18 +61,13 @@ classdef TerrainCL
             fz_dot = @(t) 4*cos(t);
             fz_dot_dot = @(t) -4*sin(t); 
 
-
+            
 
             kappa = @(t) -4*sin(t);
 
-            ni = @(t) 4*sin(t).*(sin(t) - 4*pi*t) - (2*sin(t))/5 - cos(t);
+            ni = @(t) 4*sin(t)*(sin(t) - 4*pi*t) - (2*sin(t))/5 - cos(t);
 
-            tau = @(t) 4*pi - cos(t) + 4*sin(t).*((2*cos(t))/5 - sin(t)); 
-
-
-            Kppa = kappa(obj.Tdt); 
-            Nni = ni(obj.Tdt);
-            Ttau = tau(obj.Tdt); 
+            tau = @(t) 4*pi - cos(t) + 4*sin(t)*((2*cos(t))/5 - sin(t)); 
 
 
             figure(1)
@@ -89,7 +84,6 @@ zlabel({'slope','(y-axis)'})
 title('paramteric trajectory modeling')
             if saved 
                 road3Dd = [X' ,  Y' , Z'];
-                knt = [Kppa' , Nni' , Ttau']; 
             end 
 
         end 

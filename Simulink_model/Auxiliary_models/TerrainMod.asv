@@ -1,7 +1,6 @@
 clc
 clear all 
 close all
-
 %% 
 
 Terr = TerrainCL(5, 0.05); 
@@ -11,16 +10,12 @@ road = Terr.TwDTrj(true, 0.06, 3.8, 15, 3);
 %road3D = Terr.TrDTrj(true, 0.06, 3.8, 15, 3, 0.4, 1, 4, 2);
 
 
-[road3D,  ktp]= Terr.default3D(true); 
+[road3D,  = Terr.default3D(true); 
 
 %% retrieve heading, slope and banking from coordinates x-y-z 
 X = road3D(1:end, 1); 
 Y = road3D(1:end, 2); 
 Z = road3D(1:end, 3);
-
-kappa = ktp(1:end, 1); 
-ni = ktp(1:end, 2);
-tau = ktp(1:end, 3); 
 
 %heading = rad2deg(atan(X ./  Y));  % atan(x/y) 
 heading(1,1) = 0; 

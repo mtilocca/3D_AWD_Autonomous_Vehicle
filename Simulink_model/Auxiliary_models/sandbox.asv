@@ -51,8 +51,8 @@ fz_dot_dot = diff(fz_dot)
 
            
 
-            kappa = fz_dot_dot
 
-            ni = fy_dot_dot + fx_dot *fz_dot_dot
+
+            ni = fy_dot_dot + fx_dot 
 
             tau =  fx_dot_dot -fz_dot_dot*fy_dot

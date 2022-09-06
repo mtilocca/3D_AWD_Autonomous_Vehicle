@@ -1,7 +1,7 @@
 %function [X, Y, Z] = Terrain()
 %%  Terrain Modeling without toolbox -- Parametric road Modeling 
 
-fx = @(t) 2*pi.*t.^2; % heading 
+fx = @(t) 2*pi.*t.^2+cos(t); % heading 
 fy = @(t) 0.4*sin(t)+1 + cos(t); % slope 
 fz = @(t) 4*sin(t)+2; % banking
 
@@ -11,6 +11,7 @@ T = [0:0.02:3.4]; % same number of steps as for simulation time
 X = fx(T);
 Y = fy(T);
 Z = fz(T);
+
 
 
 % - for debug and visualization purposes 
