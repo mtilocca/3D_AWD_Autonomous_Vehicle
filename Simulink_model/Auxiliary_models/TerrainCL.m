@@ -75,7 +75,7 @@ classdef TerrainCL
             Ttau = tau(obj.Tdt); 
 
 
-            figure(1)
+            figure(2)
 %plot3(X,Z,Y, "ko")
 
 %hold on
