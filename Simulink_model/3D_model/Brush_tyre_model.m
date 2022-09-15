@@ -1,4 +1,4 @@
-function [Fx, Fy, Fz] = Brush_tyre_model(vx, vy, delta, omega)
+function [Fx, Fy, Fz] = Brush_tyre_model(vx, vy, delta, omega, wf, wr)
 
 % ********************************************************************************************************
 % INPUTS OF THE MODEL 
@@ -26,10 +26,6 @@ CsR = 41727.2727272727; % rear longitudinal tire stiffness --
 CaF = 67740.0047457928; % front lateral cornering stiffness -- 
 CaR = 90232.5227453858;  % rear lateral cornering stiffness --  
 
-%% side slip and front slip angles 
-
-[sf, sr] = longSlipEst(vx, wf, wr); 
-[alphaF, alphaR] = sideSlipEst(vx, vy, delta, omega);
 
 %% Road parameters 
 mu = 0.8; % dry road 
@@ -71,8 +67,14 @@ Wf = (mf+mr)*az *(a/(a+b));
 Wr = (mr +mf)*az *(b/(a+b)); 
 
 Fz = [Wf Wr]; 
+
+%% side slip and front slip angles 
+
+[sf, sr] = longSlipEst(vx, wf, wr); 
+[alphaF, alphaR] = sideSlipEst(vx, vy, delta, omega);
+
 %%                FRONT WHEEL/S 
-lambdaf = Lambd(CsF, CaF, mu, Wf, eps, sf, alphaF);
+lambdaf = Lambd(CsF, CaF, mu, Wf, sf, alphaF);
 
 % lambda func 
 
@@ -88,7 +90,7 @@ Fy_f = CaF * LambfyF * Wf;
 
 %%   REAR WHEELS 
 
-lambdar = Lambd(CsR, CaR, mu, Wr, eps, sr, alphaR);
+lambdar = Lambd(CsR, CaR, mu, Wr, sr, alphaR);
 
 Flambar = calcLamb(lambdar); 
 
