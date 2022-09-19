@@ -71,9 +71,9 @@ Fxf = interp1(tlon, Fxf, VFL.t);
 
 % calculate rear and front slip 
 
-SlipF = (VFL.v - vxnewF)./vxnewF; 
+SlipF = (VFL.v - vxnewF)./vxnewF;   % put into file 
 
-SlipR = (VRavg -vxRes) ./ vxRes; 
+SlipR = (VRavg -vxRes) ./ vxRes;  % put into file 
 
 Fxf_rID= (SlipF < -0.4);  % filter front 
 Fxf = Fxf(~Fxf_rID); 
@@ -107,6 +107,7 @@ hold on
 plot(SlipF, pFitF)
 xlabel("longitudinal slip", "DisplayName", "fitting")
 ylabel("F_x [N]")
+title("Front longitudinal Slip")
 legend
 
 
@@ -150,7 +151,7 @@ plot(tFxf, SlipF, 'r')
 grid on 
 grid minor 
 xlabel("time [s]")
-ylabel("front slip [rad]")
+ylabel("front slip ")
 title('Front longitudinal slip')
 
 figure(6)
@@ -158,7 +159,7 @@ plot(tFxr, SlipR, 'b')
 grid on 
 grid minor 
 xlabel("time [s]")
-ylabel("rear slip [rad]")
+ylabel("rear slip ")
 title('Rear longitudinal slip')
 
 % figure(7)

@@ -16,16 +16,13 @@ close all
 %% laguna seca 3D 
 
 
-load('/Users/mariotilocca/Desktop/Thesis/Simulink_model/Auxiliary_models/Data/20130222_01_02_03_grandsport.mat')
-
-
 
  %load('/Users/mariotilocca/Desktop/Thesis/Simulink_model/Auxiliary_models/Data/3DTrack/20130810_02_01_01_grandsport.mat')
  % best so far 
 
  
 
-% load('/Users/mariotilocca/Desktop/Thesis/Simulink_model/Auxiliary_models/Data/3DTrack/20130811_02_01_01_grandsport.mat')  % quite good 
+ load('/Users/mariotilocca/Desktop/Thesis/Simulink_model/Auxiliary_models/Data/3DTrack/20130811_02_01_01_grandsport.mat')  % quite good 
 
 
 
@@ -180,6 +177,19 @@ legend
 % title("rear side slip cornering stiffness")
 % hold off 
 
+%% filtering 
+
+
+upbound = 40/3.6;
+IDs = (vx >= 0) & (vx < upbound); 
+
+
+vx_n = vx(IDs);
+
+ay = ay(IDs); 
+
+alphaFront = alphaFront(IDs); 
+alphaRear = alphaRear(IDs);
 %%
 
 
@@ -200,7 +210,7 @@ FyR = params.massRear.value .*ay;
 % grid on 
 % grid minor
 
-FyF_filt = (FyF > -922) & (FyF < 8) & (alphaFront >= 1.45); 
+%FyF_filt = (FyF > -922) & (FyF < 8) & (alphaFront >= 1.45); 
 FyF_f = FyF(~FyF_filt);
 %FyF_f = resample(FyF_f, 1,50); 
 
@@ -210,10 +220,10 @@ alphaFront_f = deg2rad(alphaFront_f);
 %alphaFront_f = resample(alphaFront_f, 1,50); 
 alphaFront = deg2rad(alphaFront);
 
-coeff1 = polyfix(alphaFront_f, FyF_f, 1, 0, 0, [],[]); 
+coeff1 = polyfix(alphaFront, FyF, 1, 0, 0, [],[]); 
 coeff2 = polyfix(alphaRear, FyR, 1, 0, 0 ,[], []);
 
-pFitF = polyval(coeff1, alphaFront_f); 
+pFitF = polyval(coeff1, alphaFront); 
 pFitR = polyval(coeff2, alphaRear);
 
 figure(11)

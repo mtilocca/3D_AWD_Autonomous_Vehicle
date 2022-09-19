@@ -29,8 +29,8 @@ plot3(X,Z,Y, "r")
 grid on
 grid minor
 zlim([0 15])
-xlabel({'heading','(x-axis)'})
-ylabel({'banking','(z-axis)'})
+xlabel({'heading','(z-axis)'})
+ylabel({'banking','(x-axis)'})
 zlabel({'slope','(y-axis)'})
 title('paramteric trajectory modeling')
 
