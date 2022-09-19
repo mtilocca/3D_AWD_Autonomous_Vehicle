@@ -2,6 +2,13 @@ clc
 clear all 
 close all
 
+
+
+%% define theta-sigma-beta and s 
+
+
+
+
 %% 
 
 Terr = TerrainCL(5, 0.05); 

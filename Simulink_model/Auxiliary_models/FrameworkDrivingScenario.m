@@ -1,6 +1,6 @@
 clc
-%close all
-%clear all
+close all
+clear all
 
 %% 1-D straight road 
 

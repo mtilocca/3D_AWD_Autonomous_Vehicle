@@ -2,6 +2,13 @@ clc
 clear all 
 close all
 
+
+
+%% define theta-sigma-beta and s 
+
+
+
+
 %% 
 
 Terr = TerrainCL(5, 0.05); 
@@ -37,4 +44,11 @@ banking(1,1) = 0;
 %%  export into a .mat file : x-y-z & kappa ni tau 
 
 
-path
+path.x = X; 
+path.y = Y;
+path.Z = Z; 
+path.kappa = kappa;
+path.ni = ni;
+path.tau = tau; 
+
+save('path');  % export the path 
