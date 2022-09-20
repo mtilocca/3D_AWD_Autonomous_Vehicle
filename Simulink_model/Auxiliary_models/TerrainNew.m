@@ -103,8 +103,27 @@ title("BC segment - straight line")
 %% calculate beta_dot theta_dot sigma_dot and kappa ni tau 
 
 
+theta_dot = diff(thetaBC); 
+theta_dot = [0, theta_dot']';
+
+sigma_dot = diff(sigmaBC);
+sigma_dot = [0, sigma_dot']';
+
+beta_dot = diff(betaBC); 
+beta_dot = [0, beta_dot']';
 
 
+kappa = theta_dot - beta_dot.*sin(sigmaBC); % rotation on z -axis 
+
+ni =  sigma_dot.*cos(thetaBC) + beta_dot.*sin(betaBC).*cos(sigmaBC) ; % rotation on y - axis 
+
+tau = beta_dot.*cos(sigmaBC).*cos(thetaBC) - sin(betaBC).*sigma_dot; % rotation on x - axis 
+
+
+
+pathTerrain = [xBC yBC zBC thetaBC sigmaBC betaBC kappa ni tau]; 
+
+save("pathTerrain.mat", "pathTerrain");  % path export 
 
 
 %% plot banking with road scenario and way points 
