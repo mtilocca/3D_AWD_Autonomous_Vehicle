@@ -39,19 +39,19 @@ title("AB segment - straight line")
 %% BC segment left curve 
 
 
-Rbc = 40;  % radius of the turn 
+Rbc = 110;  % radius of the turn 
 
 Lbc = pi * Rbc; % length of the turn approximate 
 
-minSbc = max(sAB(:,1)); 
-
+%minSbc = max(sAB(:,1)); 
+minSbc = 0; 
 
 sBC = minSbc: 0.1 :Lbc+minSbc; 
 sBC = sBC';
 
-
+stepThetaBC = (2*pi)/(length(sBC)-1);
 % left turn - heading 
-thetaBC = 0:0.005:2*pi; 
+thetaBC = 0:stepThetaBC:2*pi; 
 thetaBC= thetaBC';
 
 
@@ -72,7 +72,7 @@ sigmaBC(1:length(sBC),1) = maxSigmaBC;
 
 betaBC = zeros(length(sBC),1);
 
-maxbetaBC = asin(7.5/100);
+maxbetaBC = asin(15/100);
 
 stepbetaBC = maxbetaBC/50; 
 
@@ -105,7 +105,36 @@ title("BC segment - straight line")
 
 
 
+
+
 %% plot banking with road scenario and way points 
+
+resRate = 10;
+
+xRoad = resample(xBC, 1, resRate);
+yRoad = resample(yBC, 1, resRate);
+zRoad = resample(zBC, 1, resRate);
+
+% banking angle 
+
+scenario3 = drivingScenario;
+
+% transpose waypoints so they visually align with bank angles below
+roadCenters3 = zeros(length(xRoad)-1,3);
+
+roadCenters3(:,1) = xRoad(1:end-1,1); 
+roadCenters3(:,2) = yRoad(1:end-1,1); 
+roadCenters3(:,3) = zRoad(1:end-1,1); 
+
+
+bankAngles = zeros(length(xRoad)-1,1);
+
+bankAngles(:,1)= rad2deg(maxbetaBC);
+
+road(scenario3, roadCenters3, bankAngles, 'lanes', lanespec(4));
+plot(scenario3,'RoadCenters','off');
+view(-30,10)
+
 
 
 
