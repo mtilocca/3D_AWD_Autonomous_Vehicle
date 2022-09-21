@@ -32,6 +32,8 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
         obj.kappa = obj.vehRoute(:,7);
         obj.ni = obj.vehRoute(:,8);
         obj.tau = obj.vehRoute(:,9); 
+        obj.S = obj.vehRoute(:,10);
+        obj.length_vehRoute = obj.S(end,1);
 
 
         %         numOfClothoids_route = size(obj.refRoute_points,1);
@@ -70,30 +72,66 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
 
         %minDiff = min(distances(:,1)); 
 
-        index = find(min(distances(:,1))); 
+        indexP = find(distances == min(distances(:,1))); 
 
             % Use pure pursuit arc path following
             % Curvilinear coord of the point belonging to the road middle line
             % that is closest w.r.t. the current vehicle position
 %             [~,~,s_closest,~,~,~] = obj.vehRoute.closestPoint(x_vehCoM,y_vehCoM);
-%                 curvAbscissa_lookAhead = s_closest+obj.purePursuit_lookAhead;
-%           
-%             if (curvAbscissa_lookAhead>obj.length_vehRoute)
-%                 curvAbscissa_lookAhead = obj.length_vehRoute;
-%             end
-%             [x_lookAhead,y_lookAhead,theta_lookAhead,curv_lookAhead] = obj.vehRoute.evaluate(curvAbscissa_lookAhead);
-%             targetPoint_latControl = [x_lookAhead,y_lookAhead,theta_lookAhead,curv_lookAhead];
-%        
+                s_closest = obj.S(indexP,1);
+
+                curvAbscissa_lookAhead = s_closest+obj.purePursuit_lookAhead;  % route closest point length value + lookahead 
+          
+            if (curvAbscissa_lookAhead > obj.length_vehRoute)  % if end of circuit point then last S -- control targets 
+                curvAbscissa_lookAhead = obj.length_vehRoute;
+            end
+              
+            curvAbscissa_lookAhead = round(curvAbscissa_lookAhead, 1, 'decimals');  
+            
+            indexTgP = find(obj.S == curvAbscissa_lookAhead);   % if we cannot find exact number ? -- we need to round it -- ** Possible problem 
+
+
+            x_lookAhead = obj.X(indexTgP,1); 
+            y_lookAhead = obj.Y(indexTgP,1); 
+            z_lookAhead = obj.Z(indexTgP,1); 
+
+
+            theta_lookAhead = obj.theta(indexTgP,1); 
+            sigma_lookAhead = obj.sigma(indexTgP,1); 
+            beta_lookAhead = obj.beta(indexTgP,1); 
+
+            kappa_lookAhead = obj.kappa(indexTgP,1); 
+            ni_lookAhead = obj.ni(indexTgP,1); 
+            tau_lookAhead = obj.tau(indexTgP,1); 
+            
+            
+            
+            
+            
+            % maybe theta, sigma, beta, kappa, ni tau not from lookahread
+            % point but where they are ? -- possible hint 
+            
+
+            %[x_lookAhead,y_lookAhead,theta_lookAhead,curv_lookAhead] = obj.vehRoute.evaluate(curvAbscissa_lookAhead);
+            targetPoint_latControl = [x_lookAhead,y_lookAhead,theta_lookAhead,z_lookAhead, theta_lookAhead, sigma_lookAhead, beta_lookAhead, kappa_lookAhead, ni_lookAhead, tau_lookAhead];
+       
             
         
         % desired vehicle speed [m/s]
         speed_req = 15/3.6;  
-%         if (x_vehCoM>=obj.x_parkLot && y_vehCoM>obj.y_lowBound_parkLot && y_vehCoM<obj.y_uppBound_parkLot)   % (s_closest >= obj.vehRoute.length-10)
-%             speed_req = 0.1;  % brake when reaching the parking lot
-%             endOfCircuit = 1; % flag to indicate whether the end of the circuit has been reached or not
-%         else
+
+        endCicruitID = find(obj.S == obj.S(end,1)); 
+
+        x_End = obj.X(endCicruitID,1);
+        y_End = obj.Y(endCicruitID,1);
+        z_End = obj.Z(endCicruitID,1);
+        
+        if (x_vehCoM>= x_End && y_vehCoM>= y_End && z_vehCoM >= z_End)   % (s_closest >= obj.vehRoute.length-10)
+            speed_req = 0.1;  % brake when reaching the parking lot
+            endOfCircuit = 1; % flag to indicate whether the end of the circuit has been reached or not
+        else
             endOfCircuit = 0;
-%         end
+        end
     end
 
 

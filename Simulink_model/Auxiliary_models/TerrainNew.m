@@ -121,7 +121,7 @@ tau = beta_dot.*cos(sigmaBC).*cos(thetaBC) - sin(betaBC).*sigma_dot; % rotation 
 
 
 
-pathTerrain = [xBC yBC zBC thetaBC sigmaBC betaBC kappa ni tau]; 
+pathTerrain = [xBC yBC zBC thetaBC sigmaBC betaBC kappa ni tau sBC]; 
 
 save("pathTerrain.mat", "pathTerrain");  % path export 
 
