@@ -10,7 +10,7 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
     %% Private properties
     properties(Access = private)
         % Initialize a clothoid list for the vehicle route 
-        vehRoute = load('pathTerrain.mat');
+        vehRoute = load('/Users/mariotilocca/Desktop/Thesis/Simulink_model/3D_model/set_up/pathTerrain.mat');
      
     end
 
@@ -20,6 +20,8 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
     %% setupImpl - used for initialization
     function setupImpl(obj)
         % Build the clothoid list for the vehicle route 
+
+       % pathTerrain = [xBC yBC zBC thetaBC sigmaBC betaBC kappa ni tau sBC]; 
 
         obj.X = obj.vehRoute(:,1);
         obj.Y = obj.vehRoute(:,2);

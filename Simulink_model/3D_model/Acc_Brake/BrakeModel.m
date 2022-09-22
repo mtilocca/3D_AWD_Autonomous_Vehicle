@@ -1,4 +1,4 @@
-function [TwF,TwR] = BrakeModel(reqBrakeTorqueF, reqBrakeTorqueF, omegaF ,omegaR)
+function [TwF,TwR] = BrakeModel(reqBrakeTorqueF, reqBrakeTorqueR, omegaF ,omegaR)
 
     % ----------------------------------------------------------------
     %% Function purpose: compute braking torques at front wheels with brake model

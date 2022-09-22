@@ -7,16 +7,16 @@ function cond = IConditions()
 
     datas = getdatumStruct(); 
 
-    m  = datas.vehicleM; % vehicle mass
-    Lr = datas.vehicleLr; % Wheel base rear 
-    Lf = datas.vehicleLr;  % Wheel base front 
-    L  = Lf + Lr; % wheel base summed 
-    h = datas.vehicleH; % vehicle height 
-    Ixx = datas.vehicleIxx; % roll inertia
-    Iyy = datas.vehicleIyy; % pitch inertia
-    Izz = dats.vehicleIzz; % yaw inertia
-    Ixz = datas.vehicleIxz; % cross inertia
-    w = datas.vehicleW; % width
+%     m  = datas.vehicleM; % vehicle mass
+%     Lr = datas.vehicleLr; % Wheel base rear 
+%     Lf = datas.vehicleLr;  % Wheel base front 
+%     L  = Lf + Lr; % wheel base summed 
+%     h = datas.vehicleH; % vehicle height 
+%     Ixx = datas.vehicleIxx; % roll inertia
+%     Iyy = datas.vehicleIyy; % pitch inertia
+%     Izz = dats.vehicleIzz; % yaw inertia
+%     Ixz = datas.vehicleIxz; % cross inertia
+%     w = datas.vehicleW; % width
     %adC = datas.vehicleMu; % adherence coefficient 
     %Kr = datas.vehicleKr; % rear cornering slip
     %Kf = datas.vehicleKf; % front cornering slip 
@@ -38,14 +38,20 @@ function cond = IConditions()
 
     %% ICs for all the states
 
-    x0 = 0; % [m] initial x-coordinate of the vehicle CoM
-    y0 = 0; % [m] initial y-coordinate of the vehicle CoM
-    z0 = 0;  % [m] initial z-coordinate of the vehicle CoM 
-    theta0 = datas.roadTheta0;
-    beta0 = datas.roadBeta0 ;
-    sigma0 = datas.roadSigma0; 
+    pathT = load('/Users/mariotilocca/Desktop/Thesis/Simulink_model/3D_model/set_up/pathTerrain.mat'); 
 
-    s0  = 0; % [m] length of the curve 
+    x0 = pathT(1,1); % [m] initial x-coordinate of the vehicle CoM
+    y0 = pathT(1,2); % [m] initial y-coordinate of the vehicle CoM
+    z0 = pathT(1,3);  % [m] initial z-coordinate of the vehicle CoM 
+
+    % pathTerrain = [xBC yBC zBC thetaBC sigmaBC betaBC kappa ni tau sBC]; 
+    
+
+    theta0 = pathT(1,4);
+    sigma0 = pathT(1,5);
+    beta0 = pathT(1,6);
+
+    s0  = pathT(1,10); % [m] length of the curve 
     n0 = 0; % [m] lateral coordinate -- init error equal to 0 
     alpha0 = 0; % [rad] yaw angle 
 
@@ -57,8 +63,8 @@ function cond = IConditions()
     omegaY0 = 0; % [rad/s] y-axis angular speed 
     omegaZ0= 0; % [rad/s] z-axis angular speed
 
-    Nr0 = 0; % [N] vertical rear tire force
-    Nf0 = 0; % [N] vertical front tire force
+    Nr0 = datas.M * g * (b/(a+b)); % [N] vertical rear tire force
+    Nf0 = datas.M * g * (a/(a+b));% [N] vertical front tire force
 
     S0 = 0; % [N] longitudinal tire force 
     delta0 = 0; % [rad] initial steering angle 
@@ -68,7 +74,7 @@ function cond = IConditions()
     Fy0 = 0 ; % longitudinal force -- assume steady state velocity -- cruise control  
 
     
-    cond= [x0, y0, z0, theta0, btea0, sigma0 , s0, n0, alpha0, u0, v0, w0, omegaX0, omegaY0, omegaZ0, Nr0, Nf0, S0, delta0, pedal0, Fy0];
+    cond= [x0, y0, z0, theta0, beta0, sigma0 , s0, n0, alpha0, u0, v0, w0, omegaX0, omegaY0, omegaZ0, Nr0, Nf0, S0, delta0, pedal0, Fy0];
 
     % how to calculate vehicle pose in simulink ? ** important ** 
        
