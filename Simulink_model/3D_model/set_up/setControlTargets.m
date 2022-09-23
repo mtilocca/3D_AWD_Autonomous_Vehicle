@@ -23,18 +23,18 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
 
        % pathTerrain = [xBC yBC zBC thetaBC sigmaBC betaBC kappa ni tau sBC]; 
 
-        obj.X = obj.vehRoute(:,1);
-        obj.Y = obj.vehRoute(:,2);
-        obj.Z = obj.vehRoute(:,3);
+        obj.X = obj.vehRoute.pathTerrain(:,1);
+        obj.Y = obj.vehRoute.pathTerrain(:,2);
+        obj.Z = obj.vehRoute.pathTerrain(:,3);
 
-        obj.theta = obj.vehRoute(:,4);
-        obj.sigma = obj.vehRoute(:,5);
-        obj.beta = obj.vehRoute(:,6);
+        obj.theta = obj.vehRoute.pathTerrain(:,4);
+        obj.sigma = obj.vehRoute.pathTerrain(:,5);
+        obj.beta = obj.vehRoute.pathTerrain(:,6);
 
-        obj.kappa = obj.vehRoute(:,7);
-        obj.ni = obj.vehRoute(:,8);
-        obj.tau = obj.vehRoute(:,9); 
-        obj.S = obj.vehRoute(:,10);
+        obj.kappa = obj.vehRoute.pathTerrain(:,7);
+        obj.ni = obj.vehRoute.pathTerrain(:,8);
+        obj.tau = obj.vehRoute.pathTerrain(:,9); 
+        obj.S = obj.vehRoute.pathTerrain(:,10);
         obj.length_vehRoute = obj.S(end,1);
 
 

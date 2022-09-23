@@ -40,18 +40,18 @@ function cond = IConditions()
 
     pathT = load('/Users/mariotilocca/Desktop/Thesis/Simulink_model/3D_model/set_up/pathTerrain.mat'); 
 
-    x0 = pathT(1,1); % [m] initial x-coordinate of the vehicle CoM
-    y0 = pathT(1,2); % [m] initial y-coordinate of the vehicle CoM
-    z0 = pathT(1,3);  % [m] initial z-coordinate of the vehicle CoM 
+    x0 = pathT.pathTerrain(1,1); % [m] initial x-coordinate of the vehicle CoM
+    y0 = pathT.pathTerrain(1,2); % [m] initial y-coordinate of the vehicle CoM
+    z0 = pathT.pathTerrain(1,3);  % [m] initial z-coordinate of the vehicle CoM 
 
     % pathTerrain = [xBC yBC zBC thetaBC sigmaBC betaBC kappa ni tau sBC]; 
     
 
-    theta0 = pathT(1,4);
-    sigma0 = pathT(1,5);
-    beta0 = pathT(1,6);
+    theta0 = pathT.pathTerrain(1,4);
+    sigma0 = pathT.pathTerrain(1,5);
+    beta0 = pathT.pathTerrain(1,6);
 
-    s0  = pathT(1,10); % [m] length of the curve 
+    s0  = pathT.pathTerrain(1,10); % [m] length of the curve 
     n0 = 0; % [m] lateral coordinate -- init error equal to 0 
     alpha0 = 0; % [rad] yaw angle 
 
@@ -62,6 +62,9 @@ function cond = IConditions()
     omegaX0 = 0; % [rad/s] x-axis angular speed 
     omegaY0 = 0; % [rad/s] y-axis angular speed 
     omegaZ0= 0; % [rad/s] z-axis angular speed
+
+    a = datas.a;
+    b = datas.b;
 
     Nr0 = datas.M * g * (b/(a+b)); % [N] vertical rear tire force
     Nf0 = datas.M * g * (a/(a+b));% [N] vertical front tire force

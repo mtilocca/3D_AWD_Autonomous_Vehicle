@@ -11,7 +11,7 @@ Initialization;
 
     t0 = 0;     % [s] starting time
     step_size = 0.001; % [s] discrete solver step
-    tf = 20;    % [s] stop simulation time
+    tf = 60;    % [s] stop simulation time
          
 
 
