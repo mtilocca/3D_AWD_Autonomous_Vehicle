@@ -77,7 +77,7 @@ function cond = IConditions()
     Fy0 = 0 ; % longitudinal force -- assume steady state velocity -- cruise control  
 
     
-    cond= [x0, y0, z0, theta0, beta0, sigma0 , s0, n0, alpha0, u0, v0, w0, omegaX0, omegaY0, omegaZ0, Nr0, Nf0, S0, delta0, pedal0, Fy0];
+    cond= [x0, y0, z0, theta0, sigma0,  beta0, s0, n0, alpha0, u0, v0, w0, omegaX0, omegaY0, omegaZ0, Nr0, Nf0, S0, delta0, pedal0, Fy0];
 
     % how to calculate vehicle pose in simulink ? ** important ** 
        

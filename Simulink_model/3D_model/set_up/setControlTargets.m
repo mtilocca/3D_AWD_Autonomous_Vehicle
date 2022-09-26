@@ -47,7 +47,7 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
 
     %% stepImpl - called at each time step
 
-    function [targetPoint_latControl,speed_req,endOfCircuit] = stepImpl(obj,vehPose)
+    function [targetPoint_latControl, speed_req, endOfCircuit] = stepImpl(obj,vehPose)
         x_vehCoM = vehPose(1);  % Current vehicle CoM x coord [m]
         y_vehCoM = vehPose(2);  % Current vehicle CoM y coord [m]
         z_vehCoM = vehPose(3); % Current vehicle CoM z coord [m]
@@ -59,6 +59,7 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
         j = length(obj.X); 
 
         distances = zeros(j,1); 
+        targetPoint_latControl = zeros(10,1);
 
         % calculate vehicle distance w.r.t each path point 
 
@@ -115,7 +116,7 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
             
 
             %[x_lookAhead,y_lookAhead,theta_lookAhead,curv_lookAhead] = obj.vehRoute.evaluate(curvAbscissa_lookAhead);
-            targetPoint_latControl = [x_lookAhead,y_lookAhead,theta_lookAhead,z_lookAhead, theta_lookAhead, sigma_lookAhead, beta_lookAhead, kappa_lookAhead, ni_lookAhead, tau_lookAhead];
+            targetPoint_latControl = [x_lookAhead, y_lookAhead, theta_lookAhead, z_lookAhead, theta_lookAhead, sigma_lookAhead, beta_lookAhead, kappa_lookAhead, ni_lookAhead, tau_lookAhead];
        
             
         
