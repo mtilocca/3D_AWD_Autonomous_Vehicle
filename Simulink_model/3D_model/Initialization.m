@@ -1,8 +1,9 @@
 %% Initialization
 clc
 clear all;
+close all;
 
-%addpath(genpath('FOLDER_NAME'));  -- to be used when expanding the model 
+addpath(genpath('/Users/mariotilocca/Desktop/Thesis/Simulink_model/3D_model')); % -- to be used when expanding the model 
 
 %% Open Simulink model
 
