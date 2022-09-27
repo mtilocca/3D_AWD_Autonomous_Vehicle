@@ -114,9 +114,23 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
             % maybe theta, sigma, beta, kappa, ni tau not from lookahread
             % point but where they are ? -- possible hint 
             
+            targetPoint_latControl(1) = x_lookAhead; 
+            targetPoint_latControl(2) = y_lookAhead; 
+            targetPoint_latControl(3) = z_lookAhead; 
+            targetPoint_latControl(4) = theta_lookAhead; 
+            targetPoint_latControl(5) = sigma_lookAhead; 
+            targetPoint_latControl(6) = beta_lookAhead; 
+            targetPoint_latControl(7) = kappa_lookAhead; 
+            targetPoint_latControl(8) = ni_lookAhead; 
+            targetPoint_latControl(9) = tau_lookAhead; 
+
 
             %[x_lookAhead,y_lookAhead,theta_lookAhead,curv_lookAhead] = obj.vehRoute.evaluate(curvAbscissa_lookAhead);
-            targetPoint_latControl = [x_lookAhead, y_lookAhead, theta_lookAhead, z_lookAhead, theta_lookAhead, sigma_lookAhead, beta_lookAhead, kappa_lookAhead, ni_lookAhead, tau_lookAhead];
+
+           % targetPoint_latControl = [x_lookAhead, y_lookAhead,
+           % z_lookAhead, ...
+           % theta_lookAhead, sigma_lookAhead, beta_lookAhead, ...
+           % kappa_lookAhead, ni_lookAhead, tau_lookAhead];
        
             
         

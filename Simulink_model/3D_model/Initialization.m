@@ -3,8 +3,10 @@ clc
 clear all;
 close all;
 
-addpath(genpath('/Users/mariotilocca/Desktop/Thesis/Simulink_model/3D_model')); % -- to be used when expanding the model 
-
+%addpath(genpath('/Users/mariotilocca/Desktop/Thesis/Simulink_model/3D_model')); % -- to be used when expanding the model 
+addpath(genpath('/Users/mariotilocca/Desktop/Thesis/Simulink_model/3D_model/Tyres'));
+addpath(genpath('/Users/mariotilocca/Desktop/Thesis/Simulink_model/3D_model/set_up'));
+addpath(genpath('/Users/mariotilocca/Desktop/Thesis/Simulink_model/3D_model/Acc_Brake'));
 %% Open Simulink model
 
 % 
