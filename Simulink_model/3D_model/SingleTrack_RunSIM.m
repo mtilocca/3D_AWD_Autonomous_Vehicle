@@ -5,7 +5,7 @@ clear all;
 Initialization;
 %% Define initial conditions for the simulation & load constats of the vehicle and path 
 % ----------------------------
- [X0, F0] = IConditions(); 
+ [X0, F0, pose0] = IConditions(); 
 
 %% Simulation parameters
 

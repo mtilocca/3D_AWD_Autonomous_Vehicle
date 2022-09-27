@@ -1,4 +1,4 @@
-function [cond, F0] = IConditions()
+function [cond, F0, pose0] = IConditions()
 
     % This script is used to define the initial conditions of the vehicle
     % and the model states 
@@ -76,8 +76,37 @@ function [cond, F0] = IConditions()
 
     Fy0 = 0 ; % longitudinal force -- assume steady state velocity -- cruise control  
 
+    omegaFront0 =0;
+    omegaRear0 = 0; 
+
     
-    cond= [x0, y0, z0, theta0, sigma0,  beta0, s0, n0, alpha0, u0, v0, w0, omegaX0, omegaY0, omegaZ0, Nr0, Nf0, S0, delta0, pedal0, Fy0];
+    %cond= [x0, y0, z0, theta0, sigma0,  beta0, s0, n0, alpha0, u0, v0, w0, omegaX0, omegaY0, omegaZ0, Nr0, Nf0, S0, delta0, pedal0];
+    cond = [x0, y0, z0, u0, v0, w0, beta0, sigma0, theta0, omegaX0, omegaY0, omegaZ0, pedal0, delta0, s0, n0, alpha0, omegaFront0, omegaRear0]; 
+
+    pose0 = [x0, y0, z0, theta0, sigma0, beta0]; 
+
+%     
+% dX(1) = u_dot ;
+% dX(2) = v_dot;
+% dX(3) = w_dot;
+% dX(4) = u;
+% dX(5) = v;
+% dX(6) = w;
+% dX(7) = omegaX;
+% dX(8) = omegaY;
+% dX(9) = omegaZ;
+% dX(10) = omegaXdot;
+% dX(11) = omegaYdot;
+% dX(12) = omegaZdot;
+% dX(13) = ped_dot;
+% dX(14) = delta_dot;
+% dX(15) = s_dot;
+% dX(16) = n_dot;
+% dX(17) = alpha_dot; 
+% dX(18) = omegaFront_dot;
+% dX(19) = omegaRear_dot; 
+
+
 
 
     F0 = zeros(9,1);

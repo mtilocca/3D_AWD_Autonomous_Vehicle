@@ -5,13 +5,29 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
         purePursuit_lookAhead   = 0;
         %refRoute_points         = 0;
         %Lf                      = 0;
+
+       
     end
 
     %% Private properties
     properties(Access = private)
         % Initialize a clothoid list for the vehicle route 
         vehRoute = load('/Users/mariotilocca/Desktop/Thesis/Simulink_model/3D_model/set_up/pathTerrain.mat');
-     
+         % add obj,X  etc 
+         X = 0;
+         Y = 0; 
+         Z =0; 
+
+         theta=0;
+         sigma =0;
+         beta=0;
+
+         kappa =0;
+         ni=0;
+         tau=0;
+
+         S =0;
+         length_vehRoute =0; 
     end
 
     %% Methods
