@@ -154,7 +154,7 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
 
     %%
     function [sz_1,sz_2,sz_3] = getOutputSizeImpl(~) 
-        sz_1 = [1 4];
+        sz_1 = [1 9];
         sz_2 = [1];
         sz_3 = [1];
     end

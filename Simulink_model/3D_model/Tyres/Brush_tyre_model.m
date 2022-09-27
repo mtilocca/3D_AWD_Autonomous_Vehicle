@@ -42,6 +42,7 @@ mf =526;
 mr = 488;
 %% vertical load mapping according to forward velocity & load transfer model simplified 
 
+v = vx*3.6; 
 
 switch v
 
@@ -70,8 +71,15 @@ Fz = [Wf Wr];
 
 %% side slip and front slip angles 
 
-[sf, sr] = longSlipEst(vx, wf, wr); 
-[alphaF, alphaR] = sideSlipEst(vx, vy, delta, omega);
+Slon= longSlipEst(vx, wf, wr); 
+
+sf = Slon(1);
+sr = Slon(2);
+
+alphaS = sideSlipEst(vx, vy, delta, omega);
+
+alphaF = alphaS(1);
+alphaR = alphaS(2);
 
 %%                FRONT WHEEL/S 
 lambdaf = Lambd(CsF, CaF, mu, Wf, sf, alphaF);
@@ -123,13 +131,20 @@ end
 
 function lambdaCalc = calcLamb(lambda)
 
+disp("this is lambda")
+disp(lambda)
+
 if lambda >= 1 
 
     lambdaCalc = 1; 
 
-elseif lambda <1 
+elseif lambda < 1 
 
     lambdaCalc = (2- lambda)*lambda ; 
+
+else 
+
+    lambdaCalc = 0; 
 
 end 
 end 

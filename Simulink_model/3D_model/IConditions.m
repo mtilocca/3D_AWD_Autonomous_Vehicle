@@ -1,4 +1,4 @@
-function cond = IConditions()
+function [cond, F0] = IConditions()
 
     % This script is used to define the initial conditions of the vehicle
     % and the model states 
@@ -78,6 +78,21 @@ function cond = IConditions()
 
     
     cond= [x0, y0, z0, theta0, sigma0,  beta0, s0, n0, alpha0, u0, v0, w0, omegaX0, omegaY0, omegaZ0, Nr0, Nf0, S0, delta0, pedal0, Fy0];
+
+
+    F0 = zeros(9,1);
+    Fzf = datas.M * g *(datas.a/(datas.a+datas.b));
+    Fzr = datas.M * g *(datas.b/(datas.b+datas.a));
+
+    F0(1) = 0; %Fxf;
+    F0(2) = 0; %Fxr;
+    F0(3) = 0; %Fyf;
+    F0(4) = 0; %Fyr;
+    F0(5) = Fzf;
+    F0(6) = Fzr;
+    F0(7) = 0; % omegaX;
+    F0(8) = 0 ;% TwF;
+    F0(9) = 0; %TwR; 
 
     % how to calculate vehicle pose in simulink ? ** important ** 
        
