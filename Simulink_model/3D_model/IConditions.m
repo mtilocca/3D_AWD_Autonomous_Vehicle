@@ -55,7 +55,7 @@ function [cond, F0, pose0] = IConditions()
     n0 = 0; % [m] lateral coordinate -- init error equal to 0 
     alpha0 = 0; % [rad] yaw angle 
 
-    u0 = 15; % [m/s] initial x-axis velocity  -- cruise ctrl already activated to keep speed at that. 
+    u0 = 15/3.6; % [m/s] initial x-axis velocity  -- cruise ctrl already activated to keep speed at that. 
     v0 = 0; % [m/s] initial y-axis velocity
     w0 = 0; % [m/s] initial z-axis velocity
 

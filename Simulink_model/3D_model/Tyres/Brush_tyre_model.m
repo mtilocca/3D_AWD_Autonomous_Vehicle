@@ -96,13 +96,23 @@ alphaR = alphaS(2);
 %%                FRONT WHEEL/S 
 lambdaf = Lambd(CsF, CaF, mu, Wf, sf, alphaF);
 
+disp(" front lambda func")
+disp(lambdaf)
 % lambda func 
 disp("front wheels")
 
 Flambaf = calcLamb(lambdaf); 
+disp(" lambda second func")
+disp(Flambaf)
 
+disp(" front stiffness")
+disp(CsF)
+disp("------------- &&&& --------")
 % longitudinal force 
 Fx_f = (- (CsF *sf )/(1-sf)) * Flambaf; 
+disp("longit force")
+disp(Fx_f)
+disp(" --- Brush tyre ----------")
 
 % lateral force 
 
