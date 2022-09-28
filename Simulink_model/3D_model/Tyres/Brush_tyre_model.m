@@ -42,6 +42,10 @@ mf =526;
 mr = 488;
 %% vertical load mapping according to forward velocity & load transfer model simplified 
 
+disp("vehicle forward velocity 1 ")
+disp(vx)
+disp("-----------")
+
 v = vx*3.6; 
 
 switch v
@@ -71,10 +75,18 @@ Fz = [Wf Wr];
 
 %% side slip and front slip angles 
 
+
+disp("vehicle forward velocity 2")
+disp(vx)
+
 Slon= longSlipEst(vx, wf, wr); 
 
 sf = Slon(1);
 sr = Slon(2);
+
+disp("Longitudinal slips")
+disp(sf)
+disp(sr)
 
 alphaS = sideSlipEst(vx, vy, delta, omega);
 
@@ -85,6 +97,7 @@ alphaR = alphaS(2);
 lambdaf = Lambd(CsF, CaF, mu, Wf, sf, alphaF);
 
 % lambda func 
+disp("front wheels")
 
 Flambaf = calcLamb(lambdaf); 
 
@@ -97,10 +110,17 @@ LambfyF = latForce(omega, vx, vy, delta);
 Fy_f = CaF * LambfyF * Wf; 
 
 %%   REAR WHEELS 
+disp("rear wheels")
+
+% prova = 0;
+% disp("la prova")
+% disp(prova)
+% disp("-----------------")
 
 lambdar = Lambd(CsR, CaR, mu, Wr, sr, alphaR);
 
 Flambar = calcLamb(lambdar); 
+
 
 % longitudinal force 
 Fx_r = (- (CsR *sr )/(1-sr)) * Flambar; 

@@ -75,7 +75,7 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
         j = length(obj.X); 
 
         distances = zeros(j,1); 
-        targetPoint_latControl = zeros(10,1);
+        targetPoint_latControl = zeros(9,1);
 
         % calculate vehicle distance w.r.t each path point 
 
@@ -104,6 +104,8 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
             if (curvAbscissa_lookAhead > obj.length_vehRoute)  % if end of circuit point then last S -- control targets 
                 curvAbscissa_lookAhead = obj.length_vehRoute;
             end
+
+            eml.extrinsic('round');
               
             curvAbscissa_lookAhead = round(curvAbscissa_lookAhead, 1, 'decimals');  
             
@@ -159,18 +161,18 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
         y_End = obj.Y(endCicruitID,1);
         z_End = obj.Z(endCicruitID,1);
         
-        if (x_vehCoM>= x_End && y_vehCoM>= y_End && z_vehCoM >= z_End)   % (s_closest >= obj.vehRoute.length-10)
-            speed_req = 0.1;  % brake when reaching the parking lot
-            endOfCircuit = 1; % flag to indicate whether the end of the circuit has been reached or not
-        else
+%         if ( x_vehCoM >= x_End && y_vehCoM>= y_End && z_vehCoM >= z_End)   % (s_closest >= obj.vehRoute.length-10)
+%             speed_req = 0.1;  % brake when reaching the parking lot
+%             endOfCircuit = 1; % flag to indicate whether the end of the circuit has been reached or not
+%         else
             endOfCircuit = 0;
         end
-    end
+    
 
 
     %%
     function [sz_1,sz_2,sz_3] = getOutputSizeImpl(~) 
-        sz_1 = [1 9];
+        sz_1 = [9 1];
         sz_2 = [1];
         sz_3 = [1];
     end
@@ -193,5 +195,5 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
         cp3 = false;
     end
         
-    end
+end
 end
