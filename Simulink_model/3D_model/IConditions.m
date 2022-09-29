@@ -74,10 +74,12 @@ function [cond, F0, pose0] = IConditions()
     
     pedal0 = 0; % [-] initial value for the throttle/brake pedal  --> [-1;1]
 
-    Fy0 = 0 ; % longitudinal force -- assume steady state velocity -- cruise control  
+%     Fy0 = 0 ; % longitudinal force -- assume steady state velocity -- cruise control  
 
-    omegaFront0 =0;
-    omegaRear0 = 0; 
+
+     diffVel =  u0 - ((u0 /100)*0.05); 
+    omegaFront0 = diffVel / datas.Rwf;
+    omegaRear0 = diffVel / datas.Rwr; 
 
     
     %cond= [x0, y0, z0, theta0, sigma0,  beta0, s0, n0, alpha0, u0, v0, w0, omegaX0, omegaY0, omegaZ0, Nr0, Nf0, S0, delta0, pedal0];
@@ -113,15 +115,23 @@ function [cond, F0, pose0] = IConditions()
     Fzf = datas.M * g *(datas.a/(datas.a+datas.b));
     Fzr = datas.M * g *(datas.b/(datas.b+datas.a));
 
-    F0(1) = 0; %Fxf;
-    F0(2) = 0; %Fxr;
+    [Fx_new, Fy_new, Fz_new] = Brush_tyre_model(u0, v0, delta0, omegaZ0, omegaFront0, omegaRear0); 
+
+    Fxf = Fx_new(1); % longitudinal tire forces at 0 -- or maybe not ? 
+    Fxr = Fx_new(2); 
+
+    TwF = 0;
+    TwR = 0; 
+
+    F0(1) = Fxf; %Fxf;
+    F0(2) = Fxr; %Fxr;
     F0(3) = 0; %Fyf;
     F0(4) = 0; %Fyr;
     F0(5) = Fzf;
     F0(6) = Fzr;
     F0(7) = 0; % omegaX;
-    F0(8) = 0 ;% TwF;
-    F0(9) = 0; %TwR; 
+    F0(8) = TwF ;% TwF;
+    F0(9) = TwR; %TwR; 
 
     % how to calculate vehicle pose in simulink ? ** important ** 
        

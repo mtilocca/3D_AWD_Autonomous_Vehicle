@@ -109,7 +109,7 @@ disp(" front stiffness")
 disp(CsF)
 disp("------------- &&&& --------")
 % longitudinal force 
-Fx_f = (- (CsF *sf )/(1-sf)) * Flambaf; 
+Fx_f = CsF *((sf )/(1+sf))* Flambaf; 
 disp("longit force")
 disp(Fx_f)
 disp(" --- Brush tyre ----------")
@@ -133,7 +133,7 @@ Flambar = calcLamb(lambdar);
 
 
 % longitudinal force 
-Fx_r = (- (CsR *sr )/(1-sr)) * Flambar; 
+Fx_r = ( (CsR *sr )/(1+sr)) * Flambar; 
 
 % lateral force 
 
@@ -151,7 +151,7 @@ end
 function LamC = Lambd(Cs, Ca, mu, W, s, alpha)
 
 n = mu*W*(1+s);
-d = 2*sqrt( (Cs*s)^2 + (Ca *tan(alpha)^2) );
+d = 2*sqrt( (Cs*s)^2 + (Ca *tan(alpha))^2 ) ;
 
 LamC=  n/d;
 
@@ -173,7 +173,8 @@ elseif lambda < 1
     lambdaCalc = (2- lambda)*lambda ; 
 
 else 
-
+    
+    disp("---- entered else f lambda ---")
     lambdaCalc = 0; 
 
 end 

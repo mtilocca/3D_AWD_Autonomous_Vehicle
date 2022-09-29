@@ -54,13 +54,20 @@ function Tw = MotorModel(Tm_request, Front)
 %     slopeTorqueCut = torque_mot_at_max_speed / (omega_motTorqueCut-omega_mot_max);
     
     % Compute the torque Tw delivered to the wheel 
+    Tw = 0; 
+
     if  Tm_request <= max_mot_torque
 
-           Tw = Tm_request*tau_red*eff_red;
+           Tw = (Tm_request / tau_red) *eff_red;
            
-        else
-             Tw = max_mot_torque *tau_red*eff_red;
+    elseif Tm_request > max_mot_torque
+             Tw = (max_mot_torque / tau_red) *eff_red;
+    else 
+         Tw = (max_mot_torque / tau_red) *eff_red;
     end
+
+    disp("torque requested -- function")
+    disp(Tw)
   
 end
 

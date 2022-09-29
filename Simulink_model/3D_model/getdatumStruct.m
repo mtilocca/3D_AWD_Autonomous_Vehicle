@@ -61,6 +61,8 @@ datum.brakeRatio = 0.5 ;
 datum.brakeTorqueMax = datum.maxTorque * 2; 
 datum.tau_redF = 3.5;   
 datum.tau_redR = 2.5;
+datum.Rwf = 1.87/(2*pi);
+datum.Rwr =2.01 /(2*pi) ; 
     
 
 

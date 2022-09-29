@@ -53,6 +53,8 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
         obj.S = obj.vehRoute.pathTerrain(:,10);
         obj.length_vehRoute = obj.S(end,1);
 
+        
+
 
         %         numOfClothoids_route = size(obj.refRoute_points,1);
 %         for i = 1:numOfClothoids_route-1
@@ -71,6 +73,15 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
         sigma_vehCoM  = vehPose(5);
         beta_vehCoM = vehPose(6);
       
+        disp("___________________")
+        disp("vehicle pose matrix")
+        disp(vehPose)
+        disp("___________________")
+
+%         disp("path X coordinates")
+%         disp(obj.X)
+%         disp("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+% 
 
         j = length(obj.X); 
 
@@ -131,6 +142,14 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
             
             % maybe theta, sigma, beta, kappa, ni tau not from lookahread
             % point but where they are ? -- possible hint 
+            disp("----------------------------------------------")
+            disp("control targets")
+            disp("x lookahead value")
+            disp(x_lookAhead)
+            disp("---------------------&&&&&")
+            disp("size of the lookahead")
+            disp(size(x_lookAhead))
+            disp("----------------------------------------------")
             
             targetPoint_latControl(1) = x_lookAhead; 
             targetPoint_latControl(2) = y_lookAhead; 
@@ -142,6 +161,11 @@ classdef (StrictDefaults)setControlTargets < matlab.System & matlab.system.mixin
             targetPoint_latControl(8) = ni_lookAhead; 
             targetPoint_latControl(9) = tau_lookAhead; 
 
+            disp("________________________________________________________________")
+            disp("target point after assignement")
+            disp(targetPoint_latControl)
+            disp("________________________________________________________________")
+           
 
             %[x_lookAhead,y_lookAhead,theta_lookAhead,curv_lookAhead] = obj.vehRoute.evaluate(curvAbscissa_lookAhead);
 
