@@ -103,14 +103,14 @@ title("BC segment - straight line")
 %% calculate beta_dot theta_dot sigma_dot and kappa ni tau 
 
 
-theta_dot = diff(thetaBC); 
-theta_dot = [0, theta_dot']';
+theta_dot = thetaBC ./ 0.1; 
+%theta_dot = theta_dot;
 
-sigma_dot = diff(sigmaBC);
-sigma_dot = [0, sigma_dot']';
+sigma_dot =  sigmaBC ./ 0.1; 
+%sigma_dot = [0, sigma_dot;
 
-beta_dot = diff(betaBC); 
-beta_dot = [0, beta_dot']';
+beta_dot =  betaBC ./ 0.1; 
+%beta_dot = beta_dot';
 
 
 kappa = theta_dot - beta_dot.*sin(sigmaBC); % rotation on z -axis 
@@ -153,6 +153,7 @@ bankAngles(:,1)= rad2deg(maxbetaBC);
 road(scenario3, roadCenters3, bankAngles, 'lanes', lanespec(4));
 plot(scenario3,'RoadCenters','off');
 view(-30,10)
+%zlim([-10, 200])
 
 
 

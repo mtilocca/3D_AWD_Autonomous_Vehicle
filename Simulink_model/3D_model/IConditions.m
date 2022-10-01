@@ -120,8 +120,8 @@ function [cond, F0, pose0] = IConditions()
     Fxf = Fx_new(1); % longitudinal tire forces at 0 -- or maybe not ? 
     Fxr = Fx_new(2); 
 
-    TwF = 0;
-    TwR = 0; 
+    TwF = Fxf/ datas.Rwf;
+    TwR = Fxr / datas.Rwr; 
 
     F0(1) = Fxf; %Fxf;
     F0(2) = Fxr; %Fxr;

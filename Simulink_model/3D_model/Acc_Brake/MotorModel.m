@@ -58,12 +58,12 @@ function Tw = MotorModel(Tm_request, Front)
 
     if  Tm_request <= max_mot_torque
 
-           Tw = (Tm_request / tau_red) *eff_red;
+           Tw = (Tm_request * tau_red) *eff_red;
            
     elseif Tm_request > max_mot_torque
-             Tw = (max_mot_torque / tau_red) *eff_red;
+             Tw = (max_mot_torque *tau_red) *eff_red;
     else 
-         Tw = (max_mot_torque / tau_red) *eff_red;
+         Tw = (max_mot_torque * tau_red) *eff_red;
     end
 
     disp("torque requested -- function")
